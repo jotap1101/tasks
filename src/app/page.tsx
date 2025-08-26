@@ -1,6 +1,5 @@
 import { promises as fs } from "fs";
 import { Metadata } from "next";
-import Image from "next/image";
 import path from "path";
 import { z } from "zod";
 
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
 async function getTasks() {
   const data = await fs.readFile(
     path.join(process.cwd(), "src/data/tasks.json"),
-    "utf-8"
+    "utf-8",
   );
 
   const tasks = JSON.parse(data.toString());
@@ -31,23 +30,7 @@ export default async function TaskPage() {
 
   return (
     <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/tasks-light.png"
-          width={1280}
-          height={998}
-          alt="Playground"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/tasks-dark.png"
-          width={1280}
-          height={998}
-          alt="Playground"
-          className="hidden dark:block"
-        />
-      </div>
-      <div className="hidden h-full flex-1 flex-col gap-8 p-8 md:flex">
+      <div className="flex h-full flex-1 flex-col gap-8 p-8">
         <div className="flex items-center justify-between gap-2">
           <div className="flex flex-col gap-1">
             <h2 className="text-2xl font-semibold tracking-tight">

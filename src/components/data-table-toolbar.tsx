@@ -20,42 +20,45 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center gap-2">
+    <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
+      <div className="flex w-full flex-1 flex-col items-center gap-2 sm:w-auto sm:flex-row">
         <Input
           placeholder="Filter tasks..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-8 w-full sm:w-[150px] lg:w-[250px]"
         />
-        {table.getColumn("status") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
-            options={statuses}
-          />
-        )}
-        {table.getColumn("priority") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
-            options={priorities}
-          />
-        )}
-        {isFiltered && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => table.resetColumnFilters()}
-          >
-            Reset
-            <X />
-          </Button>
-        )}
+        <div className="mr-auto flex flex-col gap-2 sm:flex-row items-stretch">
+          {table.getColumn("status") && (
+            <DataTableFacetedFilter
+              column={table.getColumn("status")}
+              title="Status"
+              options={statuses}
+            />
+          )}
+          {table.getColumn("priority") && (
+            <DataTableFacetedFilter
+              column={table.getColumn("priority")}
+              title="Priority"
+              options={priorities}
+            />
+          )}
+          {isFiltered && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => table.resetColumnFilters()}
+              className="justify-start"
+            >
+              Reset
+              <X />
+            </Button>
+          )}
+        </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-2">
         <DataTableViewOptions table={table} />
         <Button size="sm">Add Task</Button>
       </div>
