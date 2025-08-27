@@ -30,7 +30,7 @@ export function DataTableToolbar<TData>({
           }
           className="h-8 w-full sm:w-[150px] lg:w-[250px]"
         />
-        <div className="mr-auto flex flex-col gap-2 sm:flex-row items-stretch">
+        <div className="mr-auto flex flex-col items-stretch gap-2 sm:flex-row">
           {table.getColumn("status") && (
             <DataTableFacetedFilter
               column={table.getColumn("status")}
