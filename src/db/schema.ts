@@ -1,4 +1,12 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  pgTable,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
+
+import { timestamps } from "@/db/columns.helpers";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -58,4 +66,17 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at").$defaultFn(
     () => /* @__PURE__ */ new Date(),
   ),
+});
+
+export const task = pgTable("task", {
+  id: text("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  status: varchar("status", { length: 50 }).notNull(),
+  label: varchar("label", { length: 50 }).notNull(),
+  priority: varchar("priority", { length: 50 }).notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  ...timestamps,
 });
