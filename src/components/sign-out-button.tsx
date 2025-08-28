@@ -37,7 +37,11 @@ export function SignOutButton({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <Button variant="ghost" onClick={handleSignOut} className="w-full">
+    <Button
+      variant="ghost"
+      onClick={handleSignOut}
+      className="flex w-full justify-start"
+    >
       {children}
     </Button>
   );

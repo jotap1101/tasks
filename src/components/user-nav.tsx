@@ -1,3 +1,4 @@
+import { LogOutIcon } from "lucide-react";
 import { headers } from "next/headers";
 
 import { SignOutButton } from "@/components/sign-out-button";
@@ -10,7 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { auth } from "@/lib/auth";
@@ -18,7 +18,7 @@ import { getInitials } from "@/utils/get-initials";
 
 export async function UserNav() {
   const session = await auth.api.getSession({
-    headers: await headers(), // you need to pass the headers object.
+    headers: await headers(),
   });
 
   return (
@@ -49,25 +49,14 @@ export async function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
+          <DropdownMenuItem>Minha Conta</DropdownMenuItem>
+          <DropdownMenuItem>Configurações</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <SignOutButton>
+            <LogOutIcon />
             Sair
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </SignOutButton>
         </DropdownMenuItem>
       </DropdownMenuContent>
