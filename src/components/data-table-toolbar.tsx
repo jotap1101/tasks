@@ -3,12 +3,12 @@
 import { Table } from "@tanstack/react-table";
 import { X } from "lucide-react";
 
+import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
 import { DataTableViewOptions } from "@/components/data-table-view-options";
+import { DialogDemo } from "@/components/dialog-demo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-import { priorities, statuses } from "../data/data";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { priorities, statuses } from "@/data/data";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -60,7 +60,13 @@ export function DataTableToolbar<TData>({
       </div>
       <div className="ml-auto flex items-center gap-2">
         <DataTableViewOptions table={table} />
-        <Button size="sm">Add Task</Button>
+        <DialogDemo
+          textDialogTrigger="Open Dialog"
+          textDialogTitle="Edit profile"
+          textDialogDescription="Make changes to your profile here. Click save when you're done."
+          textDialogClose="Close"
+          textDialogSave="Save changes"
+        />
       </div>
     </div>
   );
